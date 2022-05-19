@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "Git Checks Workflow"
+
+on: [pull_request]
+
+jobs:
+  git:
+    runs-on: ubuntu-latest
+
+    steps:
+    # https://github.com/actions/checkout
+    - uses: actions/checkout@v3
+      with:
+        repository: "${{ github.repository }}"
+        submodules: "recursive"
+
+    # https://github.com/13rac1/block-fixup-merge-action
+    - name: Block Fixup Commit Merge
+      uses: 13rac1/block-fixup-merge-action@v2.0.0
